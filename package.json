@@ -1,0 +1,22 @@
+{
+  "name": "homo-sapiens-time",
+  "version": "0.5.0",
+  "description": "A simple time utility.",
+  "main": "homo-sapiens-time.js",
+  "scripts": {
+    "app": "node homo-sapiens-time.js"
+  },
+  "author": "fezcode",
+  "license": "MIT",
+  "keywords": [
+    "human",
+    "time",
+    "hours",
+    "minutes",
+    "seconds",
+    "days",
+    "years",
+    "months",
+    "homo sapiens"
+  ]
+}
