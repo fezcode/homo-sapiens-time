@@ -4,7 +4,10 @@
   "description": "A simple time utility.",
   "main": "homo-sapiens-time.js",
   "scripts": {
-    "app": "node homo-sapiens-time.js"
+    "app": "node homo-sapiens-time.js",
+    "debug": "node --inspect homo-sapiens-time.js",
+    "test": "jest",
+    "debug-test" : "npm test --watch"
   },
   "author": "fezcode",
   "license": "MIT",
@@ -18,5 +21,8 @@
     "years",
     "months",
     "homo sapiens"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^27.5.1"
+  }
 }
