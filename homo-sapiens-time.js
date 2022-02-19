@@ -68,6 +68,7 @@ function similarity(s1, s2) {
     return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
 }
 
+// https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
 function editDistance(s1, s2) {
     s1 = s1.toLowerCase();
     s2 = s2.toLowerCase();
@@ -112,15 +113,14 @@ function timeStringToMs(str) {
 
 /**
  * 
- * @param {*} ms 
- * @param {*} options
+ * @param {number}  ms 
+ * @param {boolean} [options.auto=true] automatically converts time with 'year','month','week','day','hour','minute','seconds','ms' 
+ * @param {array}   [options.units=['h', 'm' ,'s']] array of wanted units
+ * @param {boolean} [options.showEmpty=false] show even if given unit is empty
+ * 
  * Unlike https://github.com/shime/humanize-time/blob/master/index.js
+ * 
  * Unlike https://github.com/EvanHahn/HumanizeDuration.js/blob/main/humanize-duration.js
- * options : {
- *   auto: boolean  // automatically converts time with 'year','month','week','day','hour','minute','seconds','ms' | default: true
- *   units: [ ]     // array of wanted units | default: ['h', 'm' ,'s']
- *   showEmpty : boolean  // show even if guven unit is empty | default : false
- * }
  */
 function msToTimeString(ms, opts) {
     if (!opts) {
@@ -194,6 +194,15 @@ function msToTimeString(ms, opts) {
 
 }
 
+function impreciseDurationAddedToNow(str) {
+    let time = timeStringToMs(str);
+    let now = Date.now();
+    let added = time + now;
+    return added;
+}
 
-
-module.exports = { timeStringToMs: timeStringToMs, msToTimeString: msToTimeString };
+module.exports = {
+    timeStringToMs: timeStringToMs,
+    msToTimeString: msToTimeString,
+    impreciseDurationAddedToNow : impreciseDurationAddedToNow
+};

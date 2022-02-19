@@ -13,61 +13,61 @@ const lib = require("./homo-sapiens-time.js")
  * options = { false, none, false }
  */
 
-// test('Converts \`31557601001\` to \`1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: true});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: true});
+    console.log(a);
 
-//     expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
-// });
+    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
+});
 
-// test('Converts \`31557601001\` to \`1 year 1 second 1 ms\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: false});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year 1 second 1 ms\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: false});
+    console.log(a);
 
-//     expect(a).toBe('1 year 1 seconds 1 ms');
-// });
+    expect(a).toBe('1 year 1 seconds 1 ms');
+});
 
-// test('Converts \`31557601001\` to \`1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: true});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: true});
+    console.log(a);
 
-//     expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
-// });
+    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
+});
 
-// test('Converts \`31557601001\` to \`1 year 1 second 1 ms\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: false});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year 1 second 1 ms\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: false});
+    console.log(a);
 
-//     expect(a).toBe('1 year 1 seconds 1 ms');
-// });
+    expect(a).toBe('1 year 1 seconds 1 ms');
+});
 
-// test('Converts \`31557601001\` to \`1 year 0 month\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : false, units: [ 'year', 'month' ], showEmpty: true});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year 0 month\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : false, units: [ 'year', 'month' ], showEmpty: true});
+    console.log(a);
 
-//     expect(a).toBe('1 year 0 month');
-// });
+    expect(a).toBe('1 year 0 month');
+});
 
-// test('Converts \`31557601001\` to \`1 year\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : false, units: [ 'year', 'month' ], showEmpty: false});
-//     console.log(a);
+test('Converts \`31557601001\` to \`1 year\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : false, units: [ 'year', 'month' ], showEmpty: false});
+    console.log(a);
 
-//     expect(a).toBe('1 year');
-// });
+    expect(a).toBe('1 year');
+});
 
-// test('Converts \`31557601001\` to \`8766 hour 0 minute 1 second\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : false, showEmpty: true});
-//     console.log(a);
+test('Converts \`31557601001\` to \`8766 hour 0 minute 1 second\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : false, showEmpty: true});
+    console.log(a);
 
-//     expect(a).toBe('8766 hour 0 minute 1 second');
-// });
+    expect(a).toBe('8766 hour 0 minute 1 second');
+});
 
-// test('Converts \`31557601001\` to \`8766 hour 1 second\`', () => {
-//     var a = lib.msToTimeString(31557601001, {auto : false, showEmpty: false});
-//     console.log(a);
+test('Converts \`31557601001\` to \`8766 hour 1 second\`', () => {
+    var a = lib.msToTimeString(31557601001, {auto : false, showEmpty: false});
+    console.log(a);
 
-//     expect(a).toBe('8766 hour 1 second');
-// });
+    expect(a).toBe('8766 hour 1 second');
+});
 
 
 test('Converts \`1645307362744\` to \`8766 hour 1 second\`', () => {
@@ -75,5 +75,39 @@ test('Converts \`1645307362744\` to \`8766 hour 1 second\`', () => {
     console.log(a);
 
     expect(a).toBe('52 year 1 month 19 day 11 hour 19 minute 22 seconds 744 ms');
+});
+
+test('Add time to now', () => {
+    // 1 year 1 month = 34187400000
+
+    var now = Date.now();
+
+    var a = lib.impreciseDurationAddedToNow("1 year 1 month");
+    console.log(a);
+
+    let diff = a - now;
+
+    console.log(diff);
+    //            -2 seconds                    0 seconds
+    var result  = 34187398000 < diff && diff <= 34187400000;
+
+    expect(result).toBe(true);
+
+});
+
+test('Time added to now converted to string', () => {
+    // 1 year 1 month = 34187400000
+    let time_str = "1 year 1 month";
+    var now = Date.now();
+    var a = lib.impreciseDurationAddedToNow(time_str);
+    console.log(a);
+
+    let diff = a - now;
+    console.log(diff);
+    //            -2 seconds                    0 seconds
+    var result  = 34187398000 < diff && diff <= 34187400000;
+    expect(result).toBe(true);
+    var str = lib.msToTimeString(diff, {auto: false, showEmpty: true, units: ['year', 'month']});
+    expect(str).toBe(time_str);
 });
 
