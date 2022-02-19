@@ -79,18 +79,15 @@ test('Converts \`1645307362744\` to \`8766 hour 1 second\`', () => {
 
 test('Add time to now', () => {
     // 1 year 1 month = 34187400000
-
     var now = Date.now();
-
     var a = lib.impreciseDurationAddedToNow("1 year 1 month");
     console.log(a);
 
     let diff = a - now;
-
     console.log(diff);
-    //            -2 seconds                    0 seconds
-    var result  = 34187398000 < diff && diff <= 34187400000;
 
+    //            -2 seconds                    1 seconds
+    var result  = 34187398000 < diff && diff <= 34187401000;
     expect(result).toBe(true);
 
 });
@@ -104,10 +101,21 @@ test('Time added to now converted to string', () => {
 
     let diff = a - now;
     console.log(diff);
-    //            -2 seconds                    0 seconds
-    var result  = 34187398000 < diff && diff <= 34187400000;
+    //            -2 seconds                    1 seconds
+    var result  = 34187398000 < diff && diff <= 34187401000;
     expect(result).toBe(true);
     var str = lib.msToTimeString(diff, {auto: false, showEmpty: true, units: ['year', 'month']});
     expect(str).toBe(time_str);
 });
 
+
+test('Add negative time to now', () => {
+    // -1 minute = -60000
+    var now = Date.now();
+    var a = lib.impreciseDurationAddedToNow("-1 minute");
+    console.log(a);
+    let diff = now - a;
+    console.log(diff);
+    var result  = 0 < diff && diff <= 60000;
+    expect(result).toBe(true);
+});

@@ -51,7 +51,7 @@ const units = {
     ms : 'ms'
 }
 
-const msConversionRegex = new RegExp('((\\d+)\\s*(milliseconds|seconds|minutes|hours|days|weeks|months|years|millisecond|second|minute|hour|day|week|month|year|ms|mo|m|s|h|d|y|w)\\s*)', 'g')
+const msConversionRegex = new RegExp('((-?\\d+)\\s*(milliseconds|seconds|minutes|hours|days|weeks|months|years|millisecond|second|minute|hour|day|week|month|year|ms|mo|m|s|h|d|y|w)\\s*)', 'g')
 
 // https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
 function similarity(s1, s2) {
