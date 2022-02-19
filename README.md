@@ -4,4 +4,10 @@ A simple time utility.
 
 Human-style time descriptions to milliseconds.
 
-_Simple_
+_Quite a Simple One_
+
+## Description
+There are two main functions.
+
+- `timeStringToMs`
+- `msToTimeString`

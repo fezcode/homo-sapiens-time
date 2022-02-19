@@ -20,7 +20,7 @@
     "days",
     "years",
     "months",
-    "homo sapiens"
+    "homo-sapiens"
   ],
   "devDependencies": {
     "jest": "^27.5.1"

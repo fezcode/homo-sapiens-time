@@ -22,9 +22,9 @@ const units = {
     year : 'y',
     y : 'y',
 
-    months : 'm',
-    month : 'm',
-    mo : 'm',
+    months : 'mo',
+    month : 'mo',
+    mo : 'mo',
 
     weeks: 'w',
     week: 'w',
@@ -51,11 +51,7 @@ const units = {
     ms : 'ms'
 }
 
-const getMSEquivalent = (type, count) => {
-    return count * timeConstants[units[type]]
-}
-
-const millisecondConversionRegex = new RegExp('((\\d+)\\s*(milliseconds|seconds|minutes|hours|days|weeks|months|years|millisecond|second|minute|hour|day|week|month|year|ms|mo|m|s|h|d|y|w)\\s*)', 'g')
+const msConversionRegex = new RegExp('((\\d+)\\s*(milliseconds|seconds|minutes|hours|days|weeks|months|years|millisecond|second|minute|hour|day|week|month|year|ms|mo|m|s|h|d|y|w)\\s*)', 'g')
 
 // https://stackoverflow.com/questions/10473745/compare-strings-javascript-return-of-likely
 function similarity(s1, s2) {
@@ -99,11 +95,14 @@ function editDistance(s1, s2) {
     return costs[s2.length];
 }
 
-function timeToMilliseconds() {
-    var str = "1year 1s 1ms";
+const getMSEquivalent = (type, count) => {
+    return count * timeConstants[units[type]]
+}
+
+function timeStringToMs(str) {
     let milliseconds = 0;
     let myArray;
-    while ((myArray = millisecondConversionRegex.exec(str)) !== null) {
+    while ((myArray = msConversionRegex.exec(str)) !== null) {
         var type = myArray[3];
         var count = parseInt(myArray[2]);
         milliseconds += getMSEquivalent(type, count);
@@ -123,7 +122,7 @@ function timeToMilliseconds() {
  *   showEmpty : boolean  // show even if guven unit is empty | default : false
  * }
  */
-function millisecondsToTimeString(ms, opts) {
+function msToTimeString(ms, opts) {
     if (!opts) {
         opts = {};
     }
@@ -197,4 +196,4 @@ function millisecondsToTimeString(ms, opts) {
 
 
 
-module.exports = {timeToMilliseconds, millisecondsToTimeString};
+module.exports = { timeStringToMs: timeStringToMs, msToTimeString: msToTimeString };
