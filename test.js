@@ -119,3 +119,13 @@ test('Add negative time to now', () => {
     var result  = 0 < diff && diff <= 60000;
     expect(result).toBe(true);
 });
+
+
+test('1 year - 6 month = 6 month', () => {
+    var a = lib.timeStringToMs("1 year -6 month");
+    var b = lib.timeStringToMs("6 month");
+
+    console.log(`a-> ${a} === ${b} <-b`)
+
+    expect(a).toBe(b);
+});
