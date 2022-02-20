@@ -123,6 +123,9 @@ Units with higher priority will be closer to beginning of array.
 
 > Default value is `false`.
 
+#### Return
+Returns time string in **Time String Format** or `null` if any error occurred.
+
 
 #### Examples.
 ```JS
@@ -139,6 +142,10 @@ Takes a time string similar to ones produced in `msToTimeString` and converts it
 #### 1. `str`:
 String containing time in **Time String Format**.
 
+#### Return
+Returns ms converted from `str`.
+
+
 ### III. impreciseDurationAddedToNow
 
 #### Summary
@@ -152,3 +159,7 @@ Internally calls `timeStringToMs` to convert `str` to ms.
 
 #### 1. `str`:
 String containing time in **Time String Format**.
+
+
+#### Return
+Millisecond value of `Date.now() + str`.

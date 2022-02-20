@@ -132,7 +132,7 @@ function msToTimeString(ms, opts) {
     var options = {
         auto      : opts.auto      ?? true,
         // Array assignment creates reference not copy
-        // Why spread first: options.units and opts.units are pointing to object
+        // Why spread first: options.units and opts.units are pointing to same object
         units     : (opts.auto ? ['year','month','week','day','hour','minute','seconds','ms'] : ( [...opts.units] ?? ['hour','minute','second'])),   
         showEmpty : opts.showEmpty ?? false,
         sortUnits : opts.sortUnits ?? false

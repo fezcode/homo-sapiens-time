@@ -143,3 +143,8 @@ test('Sort units', () => {
     var b = lib.msToTimeString(31557601000, {auto: false, units: ['seconds', 'year'], sortUnits: true});
     expect(b).toBe('1 year 1 seconds');
 });
+
+test('2 year 2 seconds', () => {
+    var b = lib.msToTimeString(63115202000, {auto: false, units: ['seconds', 'year'], sortUnits: true});
+    expect(b).toBe('2 year 2 seconds');
+});
