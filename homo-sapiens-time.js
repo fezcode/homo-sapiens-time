@@ -112,12 +112,12 @@ function timeStringToMs(str) {
 }
 
 /**
- * 
+ * Takes `ms` and converts it to string that consists of given units.
  * @param {number}  ms 
- * @param {boolean} [options.auto=true] automatically converts time with 'year','month','week','day','hour','minute','seconds','ms' 
- * @param {array}   [options.units=['h', 'm' ,'s']] array of wanted units
- * @param {boolean} [options.showEmpty=false] show even if given unit is empty
- * @param {boolean} [options.sortUnits=false] sorts units for execution priority. 
+ * @param {boolean} [opts.auto=true] automatically converts time with 'year','month','week','day','hour','minute','seconds','ms' 
+ * @param {array}   [opts.units=['h', 'm' ,'s']] array of wanted units
+ * @param {boolean} [opts.showEmpty=false] show even if given unit is empty
+ * @param {boolean} [opts.sortUnits=false] sorts units for execution priority. 
  * @return null if given units are wrong. (prints error to console)
  * 
  * Unlike https://github.com/shime/humanize-time/blob/master/index.js
