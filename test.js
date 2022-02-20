@@ -129,3 +129,17 @@ test('1 year - 6 month = 6 month', () => {
 
     expect(a).toBe(b);
 });
+
+test('Wrong unit name in msToTimeString', () => {
+    var a = lib.msToTimeString(31557601000, {auto: false, units: ['seconds', 'yeer']});
+
+    expect(a).toBe(null);
+});
+
+test('Sort units', () => {
+    var a = lib.msToTimeString(31557601000, {auto: false, units: ['seconds', 'year']});
+    expect(a).toBe('31557601 seconds');
+
+    var b = lib.msToTimeString(31557601000, {auto: false, units: ['seconds', 'year'], sortUnits: true});
+    expect(b).toBe('1 year 1 seconds');
+});

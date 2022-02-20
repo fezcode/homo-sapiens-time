@@ -117,6 +117,8 @@ function timeStringToMs(str) {
  * @param {boolean} [options.auto=true] automatically converts time with 'year','month','week','day','hour','minute','seconds','ms' 
  * @param {array}   [options.units=['h', 'm' ,'s']] array of wanted units
  * @param {boolean} [options.showEmpty=false] show even if given unit is empty
+ * @param {boolean} [options.sortUnits=false] sorts units for execution priority. 
+ * @return null if given units are wrong. (prints error to console)
  * 
  * Unlike https://github.com/shime/humanize-time/blob/master/index.js
  * 
@@ -129,8 +131,25 @@ function msToTimeString(ms, opts) {
 
     var options = {
         auto      : opts.auto      ?? true,
-        units     : (opts.auto ? ['year','month','week','day','hour','minute','seconds','ms'] : (opts.units ?? ['hour','minute','second'])),
-        showEmpty : opts.showEmpty ?? false
+        // Array assignment creates reference not copy
+        // Why spread first: options.units and opts.units are pointing to object
+        units     : (opts.auto ? ['year','month','week','day','hour','minute','seconds','ms'] : ( [...opts.units] ?? ['hour','minute','second'])),   
+        showEmpty : opts.showEmpty ?? false,
+        sortUnits : opts.sortUnits ?? false
+    }
+
+    if (options.sortUnits) {
+        options.units.sort((firstEl, secondEl) => {
+            if( Object.keys(units).indexOf(firstEl) < Object.keys(units).indexOf(secondEl) ) {
+                return -1;
+            }
+            
+            if( Object.keys(units).indexOf(firstEl) > Object.keys(units).indexOf(secondEl) ) {
+                return 1;
+            }
+
+            return 0;
+        })
     }
 
     console.log("IMPORTANT: " + JSON.stringify(options.units));
@@ -151,6 +170,7 @@ function msToTimeString(ms, opts) {
     var currentUnits = options.units;   
 
     let time_str = '';
+    let runnable = true;
 
     currentUnits.forEach(currentUnit => {
         // Verify options
@@ -168,9 +188,15 @@ function msToTimeString(ms, opts) {
             });
 
             console.error(`\nError! Given unit \`${currentUnit}\` is not valid.\n       Did you mean \`${unit}\`?`);
-            process.exit(1);
+            // process.exit(1);
+            runnable = false;
         }
+    });
 
+    if (!runnable)
+        return null;
+
+    currentUnits.forEach(currentUnit => {
         // Run units.
         while ( ms >= timeConstants[units[currentUnit]] ) {
             ms -= timeConstants[units[currentUnit]];
@@ -190,7 +216,7 @@ function msToTimeString(ms, opts) {
     // console.log(`Time: ${JSON.stringify(time)} | Current Units: ${JSON.stringify(currentUnits)}`);        
     // console.log(time_str);
     
-    return time_str.trim();;
+    return time_str.trim();
 
 }
 
