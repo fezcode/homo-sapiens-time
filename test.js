@@ -55,7 +55,7 @@ test('Converts \`31557601001\` to \`1 year\`', () => {
     expect(a).toBe('1 year');
 });
 
-test('Converts \`31557601001\` to \`8766 hour 0 minute 1 second\`', () => {
+test('Converts 31557601001 to 8766 hour 0 minute 1 second', () => {
     var a = lib.msToTimeString(31557601001, {auto : false, showEmpty: true});
     console.log(a);
 

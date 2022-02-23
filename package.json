@@ -11,6 +11,12 @@
   },
   "author": "fezcode",
   "license": "MIT",
+  "files": [
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "homo-sapiens-time.js"
+  ],
   "keywords": [
     "human",
     "time",
