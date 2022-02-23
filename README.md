@@ -7,7 +7,13 @@ Human-style time descriptions to milliseconds.
 _Quite a Simple One_
 
 ## Installation
-... To be written ...
+```bash
+npm install homo-sapiens-time
+
+#or
+
+yarn add homo-sapiens-time
+```
 ## Description
 There are three main functions.
 
