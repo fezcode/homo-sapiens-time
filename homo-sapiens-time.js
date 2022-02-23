@@ -152,7 +152,7 @@ function msToTimeString(ms, opts) {
         })
     }
 
-    console.log("IMPORTANT: " + JSON.stringify(options.units));
+    // console.log("IMPORTANT: " + JSON.stringify(options.units));
 
     var time  = {
         y  : 0,
@@ -210,9 +210,6 @@ function msToTimeString(ms, opts) {
         }
         
     });
-
-    // currentUnits.forEach(element => { });
-
     // console.log(`Time: ${JSON.stringify(time)} | Current Units: ${JSON.stringify(currentUnits)}`);        
     // console.log(time_str);
     
