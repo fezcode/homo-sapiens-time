@@ -28,6 +28,11 @@
     "months",
     "homo-sapiens"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fezcode/homo-sapiens-time.git"
+  },
+  "homepage": "https://github.com/fezcode/homo-sapiens-time",
   "devDependencies": {
     "jest": "^27.5.1"
   }
