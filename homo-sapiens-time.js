@@ -133,7 +133,7 @@ function msToTimeString(ms, opts) {
         auto      : opts.auto      ?? true,
         // Array assignment creates reference not copy
         // Why spread first: options.units and opts.units are pointing to same object
-        units     : (opts.auto ? ['year','month','week','day','hour','minute','seconds','ms'] : ( opts.units ? [...opts.units] : ['hour','minute','second'])),   
+        units     : (opts.auto ? ['year','month','week','day','hour','minute','second','ms'] : ( opts.units ? [...opts.units] : ['hour','minute','second'])),   
         showEmpty : opts.showEmpty ?? false,
         sortUnits : opts.sortUnits ?? false
     }

@@ -21,6 +21,18 @@ There are three main functions.
 - `timeStringToMs`
 - `impreciseDurationAddedToNow`
 
+Defined time units are not as precise as calendar. 
+| Unit          | Milliseconds | Equivalent To |
+|---------------|--------------|---------------|
+| 1 year        | 31557600000  | 365.25 days   |     
+| 1 month       | 2629800000   | 30.4375 days  |      
+| 1 week        | 604800000    | 7 days        |     
+| 1 day         | 86400000     | 24 hours      |     
+| 1 hour        | 3600000      | 60 minutes    |    
+| 1 minute      | 60000        | 60 seconds    |     
+| 1 seconds     | 1000         | 1000 ms       |     
+| 1 millisecond | 1            | 1 ms          |  
+
 ## Time String Format
 A single time part consists of the following format:
 - Positive or Negative Integer
@@ -47,26 +59,36 @@ it just affects printed text. Integer value is not checked for plural or singula
 
 ### Example
 
-- "1year"
-- "1 year"
+- "1year" = "1 year" = "1 y"
 - "2 year 3 months"
 - "31557601000 milliseconds"
 - "1year -6 month" = "6 months"
 
-### I. msToTimeString
+-----------------------
 
-#### Summary
+## 1. msToTimeString
+
+### Summary
 This function takes `ms` and converts it to string that consists of given units.
 
 This method has FIFO execution for `units` which means order of units matter.
 For example, if `ms` is given as the first value of `units` array then result will be same as `ms` parameter's value since `ms` in `units` will consume all value.
 
-#### Parameters
+This function will detect any unit type typos given and will suggestions. For example:
+`msToTimeString(31557601000, {auto: false, units: ['seconds', 'yeer']})` will produce
+```text
+Error! Given unit `yeer` is not valid.
+           Did you mean `year`?
+```
+String similarity function is taken from [David from StackOverflow](https://stackoverflow.com/a/36566052).
+Thanks David. 👍
 
-#### 1. `ms`
+### Parameters
+
+##### 1.1 `ms`
 Number containing time in milliseconds.
 
-#### 2. `opts`
+##### 1.2 `opts`
 ```JS
 opts = {
     auto: boolean,
@@ -75,11 +97,11 @@ opts = {
     sortUnits: boolean
 }
 ```
-#### 2.1 `opts.auto` 
+##### 1.2.1 `opts.auto` 
 
 when set to `true` units will be overwritten as `['year','month','week','day','hour','minute','seconds','ms']`
 
-#### 2.2 `opts.units`
+##### 1.2.2 `opts.units`
 any valid set of time units. Any of the following can be unit:
 ```JS
 const units = {
@@ -116,56 +138,68 @@ const units = {
     ms : 'ms'
 }
 ```
-> Default value is `['year','month','week','day','hour','minute','seconds','ms']` if `auto` is `true` else `['hour','minute','second']`.
+> Default value is `['year','month','week','day','hour','minute','second','ms']` if `auto` is `true` else `['hour','minute','second']`.
 
-#### 2.3 `opts.showEmpty`
+##### 1.2.3 `opts.showEmpty`
 when set to `true`, if a unit with no value exists in the result, it will be written regardless. 
 > Default value is `false`.
 
-#### 2.4 `opts.sortUnits`
+##### 1.2.4 `opts.sortUnits`
 Since order of `opts.units` matters, you can sort units to make longer units to have higher priority.
 Priority: `y > mo > w > d > h > m > s > ms`
 Units with higher priority will be closer to beginning of array.
 
 > Default value is `false`.
 
-#### Return
+##### Return
 Returns time string in **Time String Format** or `null` if any error occurred.
 
-
-#### Examples.
+#### Examples
 ```JS
-msToTimeString(31557601000, {auto: false, units: ['seconds', 'year'], sortUnits: true} == '1 year 1 seconds'
+msToTimeString(31557601000, {auto: false, units: ['seconds', 'year'], sortUnits: true}) == '1 year 1 seconds'
+msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: false}) == '1 year 1 seconds 1 ms'
+msToTimeString(74580249002, {auto: true}) == '2 year 4 month 1 week 3 day 22 hour 44 minute 9 second 2 ms'
 
 ```
 
-### II. timeStringToMs
-#### Summary
+## 2. timeStringToMs
+### Summary
 Takes a time string similar to ones produced in `msToTimeString` and converts it to milliseconds.
 
-#### Parameters
+### Parameters
 
-#### 1. `str`:
+##### 1. `str`:
 String containing time in **Time String Format**.
 
-#### Return
+##### Return
 Returns ms converted from `str`.
 
+#### Examples
+```JS
+timeStringToMs("1 year -6 month") == timeStringToMs("6 month")
+timeStringToMs("2 years 4 months 10 days 22 hours 44 minutes 9 seconds 2 ms") == 74580249002
+timeStringToMs("1 year 1 month 1 week 1 day 1 hour -1 hour -1 day -1mo -1y") == timeStringToMs("1 week")
+timeStringToMs("1 week") == timeStringToMs("7 days")
+```
 
-### III. impreciseDurationAddedToNow
+## 3. impreciseDurationAddedToNow
 
-#### Summary
+### Summary
 
 This method adds given time string `str` to `Date.now()` value.
 Time string must be in **Time String Format**.
 
 Internally calls `timeStringToMs` to convert `str` to ms.
 
-#### Parameters
+### Parameters
 
-#### 1. `str`:
+##### 1. `str`:
 String containing time in **Time String Format**.
 
 
-#### Return
-Millisecond value of `Date.now() + str`.
+##### Return
+Millisecond value of `Date.now() + timeStringToMs(str)`.
+
+## Notes
+> This library is perfect for durations, since it is not precise I would recommend being careful about using
+> it for precise calendar operations.

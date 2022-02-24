@@ -13,32 +13,32 @@ const lib = require("./homo-sapiens-time.js")
  * options = { false, none, false }
  */
 
-test('Converts 31557601001 to 1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms', () => {
+test('Converts 31557601001 to 1 year 0 month 0 week 0 day 0 hour 0 minute 1 second 1 ms', () => {
     var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: true});
     console.log(a);
 
-    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
+    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 second 1 ms');
 });
 
 test('Converts 31557601001 to 1 year 1 second 1 ms', () => {
     var a = lib.msToTimeString(31557601001, {auto : true, units: [ 'year', 'month' ], showEmpty: false});
     console.log(a);
 
-    expect(a).toBe('1 year 1 seconds 1 ms');
+    expect(a).toBe('1 year 1 second 1 ms');
 });
 
-test('Converts 31557601001 to 1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms', () => {
+test('Converts 31557601001 to 1 year 0 month 0 week 0 day 0 hour 0 minute 1 second 1 ms', () => {
     var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: true});
     console.log(a);
 
-    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 seconds 1 ms');
+    expect(a).toBe('1 year 0 month 0 week 0 day 0 hour 0 minute 1 second 1 ms');
 });
 
 test('Converts 31557601001 to 1 year 1 second 1 ms', () => {
     var a = lib.msToTimeString(31557601001, {auto : true, showEmpty: false});
     console.log(a);
 
-    expect(a).toBe('1 year 1 seconds 1 ms');
+    expect(a).toBe('1 year 1 second 1 ms');
 });
 
 test('Converts 31557601001 to 1 year 0 month', () => {
@@ -147,4 +147,32 @@ test('Sort units', () => {
 test('2 year 2 seconds', () => {
     var b = lib.msToTimeString(63115202000, {auto: false, units: ['seconds', 'year'], sortUnits: true});
     expect(b).toBe('2 year 2 seconds');
+});
+
+test('74580249002 ms to auto', () => {
+    var a = lib.msToTimeString(74580249002, {auto: true});
+    expect(a).toBe('2 year 4 month 1 week 3 day 22 hour 44 minute 9 second 2 ms');
+})
+
+test('74580249002 ms to 2 year 4 month 10 day 22 hour 44 minute 9 second 2 ms', () => {
+    var a = lib.msToTimeString(74580249002, {auto: false, units: [ 'year', 'month', 'day', 'hour', 'minute', 'second', 'ms' ]});
+    expect(a).toBe('2 year 4 month 10 day 22 hour 44 minute 9 second 2 ms');
+})
+
+test('2 years 4 months 10 days 22 hours 44 minutes 9 seconds 2 ms to 74580249002', () => {
+    var a = lib.timeStringToMs("2 years 4 months 10 days 22 hours 44 minutes 9 seconds 2 ms");
+    expect(a).toBe(74580249002);
+});
+
+test('1 year 1 month 1 week 1 day 1 hour -1 hour -1 day -1mo -1y == 1 week', () => {
+    var a = lib.timeStringToMs("1 year 1 month 1 week 1 day 1 hour -1 hour -1 day -1mo -1y");
+    var b = lib.timeStringToMs("1 week");
+    var c = lib.timeStringToMs("7 days");
+    expect(a).toBe(b);
+    expect(b).toBe(c);
+});
+
+test('Date Now', () => {
+    var a = lib.msToTimeString(Date.now(), {auto: false, units: ['year', 'month', 'day', 'hour', 'minute', 'second', 'ms']});
+    console.log(a)
 });
