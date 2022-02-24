@@ -1,17 +1,15 @@
 # Homo Sapiens Time
 
-A simple time utility.
+A simple time utility for Node.js
 
-Human-style time descriptions to milliseconds.
+Human-style time descriptions to milliseconds and vice versa.
 
 _Quite a Simple One_
 
 ## Installation
 ```bash
 npm install homo-sapiens-time
-
 #or
-
 yarn add homo-sapiens-time
 ```
 ## Description
@@ -34,14 +32,14 @@ Defined time units are not as precise as calendar.
 | 1 millisecond | 1            | 1 ms          |  
 
 ## Time String Format
-A single time part consists of the following format:
+A single **time part** consists of the following format:
 - Positive or Negative Integer
 - Time Unit
 
 There can only be one or zero spaces between each part.
-Time part can repeat as much as needed.
+**Time part** can repeat as much as needed.
 
-All time units are: 
+All available time units are: 
 
 | Plural        | Singular     | Short | Maps To|
 |---------------|--------------|-------|:------:|
@@ -102,7 +100,7 @@ opts = {
 when set to `true` units will be overwritten as `['year','month','week','day','hour','minute','seconds','ms']`
 
 ##### 1.2.2 `opts.units`
-any valid set of time units. Any of the following can be unit:
+any valid set of time units. Following are the available units:
 ```JS
 const units = {
     years : 'y',
@@ -142,10 +140,11 @@ const units = {
 
 ##### 1.2.3 `opts.showEmpty`
 when set to `true`, if a unit with no value exists in the result, it will be written regardless. 
+
 > Default value is `false`.
 
 ##### 1.2.4 `opts.sortUnits`
-Since order of `opts.units` matters, you can sort units to make longer units to have higher priority.
+Since order of `opts.units` matters, you can sort units to make longer time units (like year being longer than month) to have higher priority.
 Priority: `y > mo > w > d > h > m > s > ms`
 Units with higher priority will be closer to beginning of array.
 
@@ -201,5 +200,5 @@ String containing time in **Time String Format**.
 Millisecond value of `Date.now() + timeStringToMs(str)`.
 
 ## Notes
-> This library is perfect for durations, since it is not precise I would recommend being careful about using
+> This library is perfect for durations. Since it is not precise I highly **recommend being careful** about using
 > it for precise calendar operations.
