@@ -12,6 +12,22 @@ npm install homo-sapiens-time
 #or
 yarn add homo-sapiens-time
 ```
+
+## Usage
+#### Node
+```js
+const hst = require("homo-sapiens-time")
+```
+#### HTML/JS
+```html
+<script type="text/javascript" src="homo-sapiens-time.js"> </script>
+<div id="message"> </div>
+<script> 
+    var x = msToTimeString(31557601000, {auto: false, units: ['seconds', 'year'], sortUnits: true}); 
+    document.getElementById("message").innerHTML=x;
+</script>
+```
+
 ## Description
 There are three main functions.
 
